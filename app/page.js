@@ -1,13 +1,14 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useRouter } from "next/navigation";
+import { useCart } from "../context/CartContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const router = useRouter();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function load() {
@@ -23,22 +24,13 @@ export default function Home() {
 
       <div className="grid md:grid-cols-3 gap-4">
         {products.map((p) => (
-          <div key={p.id} className="border border-cyan-500 p-4">
-            {p.image_url && (
-              <img
-                src={p.image_url}
-                className="w-full h-40 object-cover mb-2"
-              />
-            )}
-
+          <div key={p.id} className="border p-4">
+            <img src={p.image_url} className="h-40 w-full object-cover" />
             <h2>{p.name}</h2>
-            <p>{p.description}</p>
-            <p className="text-pink-400">${p.price}</p>
+            <p>${p.price}</p>
 
-            <button
-              className="mt-2 bg-pink-600 px-3 py-1"
-              onClick={() => router.push(`/product/${p.id}`)}
-            >
+            <button onClick={() => addToCart(p)}>ADD</button>
+            <button onClick={() => router.push(`/product/${p.id}`)}>
               VIEW
             </button>
           </div>
