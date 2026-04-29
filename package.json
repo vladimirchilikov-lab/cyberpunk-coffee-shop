@@ -1,0 +1,14 @@
+{
+  "name": "cyberpunk-coffee",
+  "private": true,
+  "scripts": {
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@supabase/supabase-js": "^2.0.0",
+    "stripe": "^14.0.0"
+  }
+}
